@@ -1,10 +1,15 @@
 pipeline {
-    agent any
+    agent {label 'java'}
 
     stages {
-        stage('Hello') {
+        stage('Clone repo') {
             steps {
-                echo 'Hello World'
+                git branch: 'main', url: 'https://github.com/harshagowda09/springboot-app-b17.git'
+            }
+        }
+        stage('build') {
+            steps {
+                sh 'mvn clean package'
             }
         }
     }
